@@ -1,0 +1,33 @@
+.navbar-logo{
+    width: 100px;
+    height: 40px;
+}
+nav{
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+.nav-item{
+    position: relative;
+}
+.active{
+    color: #44b50c !important;
+    font-weight: 500;
+}
+.active::after{
+    content: "";
+    background-color: #44b50c;
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+}
+.selector{
+    background-color: #09c;
+    height: 160px;
+    border-bottom: 1px solid #dfdfdf;
+    padding: 16px 32px;
+    margin-bottom: 10x;
+}

@@ -1,0 +1,18 @@
+.contain{
+    width: 1473px;
+    margin: auto;
+}
+/* Styles for screens with a maximum width of 767px (typically mobile devices) */
+@media only screen and (max-width: 767px){
+    .contain{
+        width: 375px;
+        margin: auto;
+    }
+}
+/* Styles for screens with a width between 768px and 1023px (typically tablets) */
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+    .contain{
+        width: 800px;
+        margin: auto;
+    }
+}

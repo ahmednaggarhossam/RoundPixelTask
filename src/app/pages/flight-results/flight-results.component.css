@@ -1,0 +1,227 @@
+.second-view-content{
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.sidebar-nav{
+    width: 290px;
+    height: 1600px;
+    background-color: gray;
+}
+mat-slider {
+    width: 90%;
+    color: red !important;
+}
+::ng-deep  mat-slider{
+    color:  red !important;
+}
+.flight-results{
+    width: 745px;
+}
+.flight-results .dropdown-toggle::after{
+    position: absolute;
+    top: 50%;
+    right: 2%;
+}
+.sidebar-right{
+    width: 400px;
+    height: 1500px;
+}
+.sidebar-right .sidebar-right-img{
+    width: 380px;
+}
+.sidebar-right .content{
+    width: 90%;
+    margin: auto;
+}
+.wholecard{
+    transition: 250ms all;
+}
+.wholecard:hover{
+    box-shadow: 4px 4px 7px #676767;
+}
+.flight-results-buttons a{
+    text-decoration: none;
+}
+.flight-results-buttons .button{
+    padding: 8px 0px;
+    cursor: pointer;
+}
+.flight-results-buttons .button-transparent{
+    background-color: transparent;
+}
+.flight-results-buttons .button:hover{
+    background-color: #dddddd;
+}
+.flight-results-buttons .button i{
+    font-size: 15px;
+    margin-right: 12px;
+    color:#676767
+}
+.flight-results-buttons .button .heading{
+    font-size: 14px;
+    color:#676767
+}
+.flight-results-buttons .button .price{
+    font-size: 12px;
+    color:#676767
+}
+.ads-flight{
+    width: 100%;
+    margin-top: 15px;
+}
+.sponsored{
+    border: 2px solid rgb(0, 128, 62);
+}
+.sponsored:hover{
+    box-shadow: 4px 4px 7px rgb(0, 128, 62);
+}
+.ads-flight .head{
+    background-color: rgb(0, 128, 62);
+}
+.ads-flight .head .start{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ads-flight .head .middle{
+    width: 70%;
+    color: #FFF;
+    display: flex;
+    justify-content: start;
+    padding-left: 20px;
+    align-items: center;
+}
+.ads-flight .head .middle .head{
+    font-size: 16px;
+    font-weight: 600;
+}
+.ads-flight .head .middle .paragraph{
+    font-size: 14px;
+    font-weight: 400;
+}
+.ads-flight .head .end{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-green{
+    color: #FFF;
+    background-color: hsla(0,0%,100%,.2);
+    border-radius: 100px;
+    font-size: 12px;
+    padding: 4px 18px;
+}
+.btn-green:hover{
+    background-color: hsla(0,0%,100%,.4);
+}
+.active .heading, .active .price, .active i{
+    color: #000 !important;
+    font-weight: 500;
+}
+.active::after{
+    content: "";
+    background-color: #44b50c;
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+}
+.flight-card{
+    padding: 10px 15px;
+}
+.flight-card .flight-logo{
+    width: 6rem;
+}
+.flight-card .flight-logo img{
+    width: 100%;
+}
+.flight-card .airline-name, .flight-card .time, .flight-card .duration{
+    font-size: 14px;
+    font-weight: 500;
+}
+.flight-card .airline-code, .flight-card .city, .flight-card .direct{
+    font-size: 12px;
+    font-weight: 400;
+}
+.flight-card .price{
+    font-size: 16px;
+    font-weight: 500;
+}
+.flight-card .book-button button{
+    padding: 4px 18px;
+    font-size: 14px;
+}
+.flight-card .Line{
+    height: 1px;
+    background-color: #676767;
+    width: 70px;
+    margin: 0px 5px;
+}
+.card-footer{
+    padding: 5px 7px;
+}
+.card-footer a{
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Styles for screens with a maximum width of 767px (typically mobile devices) */
+@media only screen and (max-width: 767px){
+    .second-view-content{
+        display: flex;
+        flex-direction: column;
+        background-color: red;
+        width: 375px;
+        margin: auto;
+    }
+    .card-head{
+        flex-direction: column;
+    }
+    .flight-results{
+        width: 375px;
+        background-color: blue;
+    }
+    .sidebar-nav{
+        width: 375px;
+
+    }
+    .sidebar-right{
+        width: 375px;
+    }
+    .sidebar-right .sidebar-right-img{
+        width: 375px;
+    }
+}
+/* Styles for screens with a width between 768px and 1023px (typically tablets) */
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+    .second-view-content{
+        display: flex;
+        flex-direction: column;
+        width: 800px;
+        background-color: #000;
+    }
+    .card-head{
+        flex-direction: column;
+    }
+    .flight-results{
+        width: 800px;
+        margin: auto;
+    }
+    .sidebar-nav{
+        width: 800px;
+
+    }
+    .sidebar-right{
+        width: 800px;
+    }
+    .sidebar-right .sidebar-right-img{
+        width: 800px;
+    }
+}
