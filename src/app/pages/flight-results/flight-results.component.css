@@ -5,15 +5,12 @@
 }
 .sidebar-nav{
     width: 290px;
-    height: 1600px;
+    height: 500px;
     background-color: gray;
 }
 mat-slider {
     width: 90%;
     color: red !important;
-}
-::ng-deep  mat-slider{
-    color:  red !important;
 }
 .flight-results{
     width: 745px;

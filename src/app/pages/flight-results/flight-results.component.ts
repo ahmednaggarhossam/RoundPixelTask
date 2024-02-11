@@ -21,52 +21,84 @@ export class FlightResultsComponent {
   keyword: string = '';
   filteredFlights: flightResults[] = [];
   filteredDataRange: flightResults[] = [];
-  minRange = 0;
-  maxRange = 500;
-  flights: Flight[] = [];
-
+  minRange = 1;
+  maxRange = 20000;
+  setNoStop =false;
+  setStop =false;
   filterForm:FormGroup = new FormGroup ({
     airlineName: new FormControl(null, [Validators.pattern(/^[()a-zA-Z0-9_,. \-"*':!%+=\/&#@]*$/)]),
-    minValue: new FormControl(0),
-    maxValue: new FormControl(500),
+    minValue: new FormControl(this.minRange),
+    maxValue: new FormControl(this.maxRange),
+    direct: new FormControl(null),
+    stop: new FormControl(null)
   });
 
-  filterBasedOnSlider(){
-    this.filterForm.controls['minValue'].valueChanges.subscribe((result) => {
-      this.filteredFlights = this.flightResults.filter((item) => this.filterFlightData(item,'minValue'))
+  filterDataBasedOnCheckbox(){
+
+  }
+  getFlightStop(){
+    this.filterForm.controls['direct'].valueChanges.subscribe((item) =>{
+      console.log(item);
+      this.filteredFlights = this.flightResults.filter((flight:flightResults) => {
+        let stops =  flight.allJourney.flights[0].stopsNum;
+        return item? stops == 0:true;
+      })
     })
+    this.filterForm.controls['stop'].valueChanges.subscribe((item) =>{
+      console.log(item);
+      this.filteredFlights = this.flightResults.filter((flight:flightResults) => {
+        let stops =  flight.allJourney.flights[0].stopsNum;
+        return item? stops == 1:true;
+      })
+    })
+  }
+
+  filterBasedOnSlider(){
+    this.filterForm.controls['minValue'].valueChanges.subscribe((minValue) => {
+      this.filteredFlights = this.getFlightsInRange();
+    });
+
+    this.filterForm.controls['maxValue'].valueChanges.subscribe((maxValue) => {
+      this.filteredFlights = this.getFlightsInRange();
+    });
   }
 
   filterFlight(){
-    this.filterForm.controls['airlineName'].valueChanges.subscribe((result) =>{
-      this.filteredFlights = this.flightResults.filter((item) => this.filterFlightData(item,'airlineName'))
-      console.log("FilterResult",this.flightResults);
-      console.log(result)
+    this.filterForm.controls['airlineName'].valueChanges.subscribe((keyword) =>{
+      this.filteredFlights = this.filterFlightData(keyword, 'airlineName')
+      console.log("FilterResult",this.filteredFlights);
+      console.log(keyword)
     })
   }
-  filterFlightData(flight:flightResults, controlName:string){
-    let searchName = this.filterForm.get(controlName)?.value;
-    return (flight.allJourney.flights[0].flightAirline[`${controlName}`].toLowerCase()).includes(String(searchName).toLowerCase());
-  }
-  minRangeValue(flight:flightResults){
-    
-  }
-  // onRangeChange(eventInfo:any){
-  //   this.minRange = event.value[0];
-  //   this.maxRange = event.value[1];
-  //   this.filteredDataRange = this.flightResults.filter((item) => item.value >= this.minRange && item.value <= this.maxRange)
-  // }
 
-  get StartValue(){
-    return 
+
+  filterFlightData(keyword : string, controlName:string){
+    return this.flightResults.filter((row:flightResults) => {
+      return String(row.allJourney.flights[0].flightAirline[`${controlName}`]).toLowerCase().includes(String(keyword).toLowerCase())
+    } )
+  }
+
+  getFlightsInRange(){
+    let min = this.filterForm.controls['minValue'].value;
+    let max = this.filterForm.controls['maxValue'].value;
+    return this.flightResults.filter((flight:flightResults) => {
+      let price = Number(this.calcFlightPriceInEgyPound(flight.itinTotalFare.amount,flight.itinTotalFare.totalTaxes,flight.itinTotalFare.currencyCode).split('EGP ')[1]);
+      return min <= price && price <= max
+    } )
+  }
+
+  filterALl(){
+    
   }
   constructor(private _TravelService:TravelService){ }
 
   ngOnInit():void{
     this.getTravelData();
+    this.filterBasedOnSlider();
+    this.filterFlight();
+    this.getFlightStop();
   }
   getTravelData(){
-    let cardsData: card[][] =[];
     this._TravelService.getFlightResults().subscribe((response) =>{
       this.flightResponseData = response;
       this.flightResults = [...this.flightResponseData.airItineraries];
@@ -89,7 +121,7 @@ export class FlightResultsComponent {
     else{
       return `${hrs}h ${mins}m`;
     }
-    
+
   }
   calcFlightPriceInEgyPound(fare:number, taxes:number, currencyCode:string):string{
     let exchangeRate:any ={

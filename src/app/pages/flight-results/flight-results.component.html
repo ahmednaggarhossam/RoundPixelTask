@@ -1,245 +1,324 @@
-
 <div class="second-view-content">
     <div class="sidebar-nav">
-        <div class="px-3">
-            <form (click)="filterFlight()" action="" [formGroup]="filterForm" class="my-4">
-                <div class="mb-3">
-                    <label for="searchFlights" class="form-label fw-bolder">Search Flights</label>
-                    <input formControlName="airlineName" name="search" type="text" class="form-control" placeholder="Search by Airport Name" id="searchFlights">
-                </div>
-                <div *ngIf="filterForm.get('airlineName')?.errors &&
-                filterForm.get('airlineName')?.touched" class="alert alert-warning" role="alert">
-                    <p *ngIf="filterForm.get('airlineName')?.errors?.['pattern']">Please Enter English Letter not Arabic</p>
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label fw-bolder">Price Range</label>
-                    <p>EGP 50 - EGP 1200</p>
-
-                    <mat-slider (onchange)="filterBasedOnSlider" [min]="70" [max]="500" color="green" discrete="true">
-                        <input value="0" formControlName="minValue" matSliderStartThumb>
-                        <input value="500" formControlName="maxValue" matSliderEndThumb>
-                    </mat-slider>
-                </div>
-            </form>
+      <div class="px-3">
+        <form
+          action=""
+          [formGroup]="filterForm"
+          class="my-4"
+        >
+          <div class="mb-3">
+            <label for="searchFlights" class="form-label fw-bolder"
+              >Search Flights</label
+            >
+            <input
+              formControlName="airlineName"
+              name="search"
+              type="text"
+              class="form-control"
+              placeholder="Search by Airport Name"
+              id="searchFlights"
+            />
+          </div>
+          <div
+            *ngIf="
+              filterForm.get('airlineName')?.errors &&
+              filterForm.get('airlineName')?.touched
+            "
+            class="alert alert-warning"
+            role="alert"
+          >
+            <p *ngIf="filterForm.get('airlineName')?.errors?.['pattern']">
+              Please Enter English Letter not Arabic
+            </p>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label fw-bolder">Price Range</label>
+            <p>EGP {{ minRange }} - EGP {{ maxRange }}</p>
+  
+            <mat-slider
+              [min]="minRange"
+              [max]="maxRange"
+              color="green"
+              discrete="true"
+            >
+              <input [value]="0" formControlName="minValue" matSliderStartThumb />
+              <input
+                [value]="50000"
+                formControlName="maxValue"
+                matSliderEndThumb
+              />
+            </mat-slider>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label fw-bolder">Search by Stops</label>
+            <br>
+            <mat-checkbox formControlName="direct" [checked]="setNoStop">non Stop</mat-checkbox>
+            <br>
+            <mat-checkbox formControlName="stop" [checked]="setStop">1 Stop</mat-checkbox>
         </div>
+        </form>
+      </div>
     </div>
     <div class="flight-results">
-        <div class="alert alert-warning mt-2" style="padding: 7px;" role="alert">
-            Please be aware that the local Egyptian banks have imposed a restriction on the use of local debit and credit cards for international purchases. Kindly use an international card if possible. We regret the inconvenience caused.
+      <div class="alert alert-warning mt-2" style="padding: 7px" role="alert">
+        Please be aware that the local Egyptian banks have imposed a restriction
+        on the use of local debit and credit cards for international purchases.
+        Kindly use an international card if possible. We regret the inconvenience
+        caused.
+      </div>
+      <div class="flight-results-buttons d-flex border rounded-1">
+        <a
+          routerLinkActive="active"
+          class="active button border w-25 position-relative"
+        >
+          <div class="d-flex justify-content-center align-items-start">
+            <div class="">
+              <i class="fa-regular fa-star"></i>
+            </div>
+            <div class="pt-0">
+              <div class="heading pt-0">Recommended</div>
+              <div class="price">EGP 6,987</div>
+            </div>
+          </div>
+        </a>
+        <a
+          routerLinkActive="active"
+          class="button border d-flex justify-content-center w-25 align-items-start"
+        >
+          <div class="">
+            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+          </div>
+          <div class="pt-0">
+            <div class="heading pt-0">Cheapest</div>
+            <div class="price">EGP 6,987</div>
+          </div>
+        </a>
+        <a
+          routerLinkActive="active"
+          class="button border d-flex justify-content-center w-25 align-items-start"
+        >
+          <div class="">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+          <div class="pt-0">
+            <div class="heading pt-0">Fastest</div>
+            <div class="price">EGP 9,309</div>
+          </div>
+        </a>
+        <button
+          class="button button-transparent border w-25 dropdown-toggle position-relative"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div class="d-flex justify-content-center align-items-start">
+            <div class="">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <div class="pt-0">
+              <div class="heading pt-0">Sort by Flight Time</div>
+              <div class="price"></div>
+            </div>
+          </div>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Departure (Earliest)</a></li>
+          <li><a class="dropdown-item" href="#">Departure (Latest)</a></li>
+          <li><a class="dropdown-item" href="#">Return (Earliest)</a></li>
+          <li><a class="dropdown-item" href="#">Return (Latest)</a></li>
+        </ul>
+      </div>
+  
+      <div class="sponsored rounded overflow-hidden my-3">
+        <div class="ads-flight mt-0">
+          <div
+            class="head d-flex justify-content-between align-items-center py-2"
+          >
+            <div class="start">
+              <img
+                src="../../../assets/images/soudiads.webp"
+                class="ps-1"
+                width="70"
+                alt=""
+              />
+            </div>
+            <div class="middle">
+              <div>
+                <div class="head">A world Class Airline</div>
+                <div class="paragraph">
+                  Fly SAUDIA and experience a memorable journey
+                </div>
+              </div>
+            </div>
+            <div class="end">
+              <button class="btn btn-green">Sponsored</button>
+            </div>
+          </div>
+          <div class="body">
+            <div></div>
+            <div></div>
+          </div>
         </div>
-        <div class="flight-results-buttons d-flex border rounded-1">
-            <a routerLinkActive="active" class="active button border w-25 position-relative">
-                <div class="d-flex justify-content-center align-items-start">
-                    <div class="">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="pt-0">
-                        <div class="heading pt-0">
-                            Recommended
-                        </div>
-                        <div class="price">
-                            EGP 6,987
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a routerLinkActive="active" class="button border d-flex justify-content-center w-25 align-items-start">
-                <div class="">
-                    <i class="fa-solid fa-circle-dollar-to-slot"></i>
-                </div>
-                <div class="pt-0">
-                    <div class="heading pt-0">
-                        Cheapest 
-                    </div>
-                    <div class="price">
-                        EGP 6,987
-                    </div>
-                </div>
-            </a>
-            <a routerLinkActive="active" class="button border d-flex justify-content-center w-25 align-items-start">
-                
-                <div class="">
-                    <i class="fa-solid fa-plane-departure"></i>
-                </div>
-                <div class="pt-0">
-                    <div class="heading pt-0">
-                        Fastest 
-                    </div>
-                    <div class="price">
-                        EGP 9,309
-                    </div>
-                </div>
-            </a>
-            <button class="button button-transparent border w-25 dropdown-toggle position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="d-flex justify-content-center align-items-start">
-                    <div class="">
-                        <i class="fa-regular fa-clock"></i>
-                    </div>
-                    <div class="pt-0">
-                        <div class="heading pt-0">
-                            Sort by Flight Time
-                        </div>
-                        <div class="price">
-                            
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Departure (Earliest)</a></li>
-                <li><a class="dropdown-item" href="#">Departure (Latest)</a></li>
-                <li><a class="dropdown-item" href="#">Return (Earliest)</a></li>
-                <li><a class="dropdown-item" href="#">Return (Latest)</a></li>
-            </ul>
+        <div class="bg-white flight-card border-bottom">
+          <div class="card-head d-flex justify-content-around align-items-center">
+            <div class="flight-logo">
+              <img src="../../../assets/images/SV.png" class="" alt="" />
+            </div>
+            <div>
+              <div class="airline-name">Saudia</div>
+              <div class="airline-code">SC -308</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="leave">
+                <div class="time">02:40</div>
+                <div class="city">Cairo</div>
+              </div>
+              <div class="Line"></div>
+              <div>
+                <div class="time">05:15</div>
+                <div class="city">Makka</div>
+              </div>
+            </div>
+            <div class="flight-time">
+              <div class="duration">06h 04m</div>
+              <div class="direct">Direct</div>
+            </div>
+            <div class="price">EGP 5800.17</div>
+            <div class="book-button">
+              <button class="btn btn-danger">Book Now</button>
+            </div>
+          </div>
         </div>
-        
-        <div class="sponsored rounded overflow-hidden my-3">
-            <div class="ads-flight mt-0">
-                <div class="head d-flex justify-content-between align-items-center py-2">
-                    <div class="start">
-                        <img src="../../../assets/images/soudiads.webp" class="ps-1" width="70" alt="">
-                    </div>
-                    <div class="middle">
-                        <div>
-                            <div class="head">A world Class Airline</div>
-                            <div class="paragraph">Fly SAUDIA and experience a memorable journey</div>
-                        </div>
-                    </div>
-                    <div class="end">
-                        <button class="btn btn-green">Sponsored</button>
-                    </div>
-                </div>
-                <div class="body">
-                    <div>
-    
-                    </div>
-                    <div>
-    
-                    </div>
-                </div>
-            </div>
-            <div class=" bg-white flight-card  border-bottom">
-                <div class="card-head d-flex justify-content-around align-items-center">
-                    <div class="flight-logo">
-                        <img src="../../../assets/images/SV.png" class="" alt="">
-                    </div>
-                    <div>
-                        <div class="airline-name">
-                            Saudia
-                        </div>
-                        <div class="airline-code">
-                        SC -308
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="leave">
-                            <div class="time">
-                                02:40
-                            </div>
-                            <div class="city">
-                                Cairo
-                            </div>
-                        </div>
-                        <div class="Line"></div>
-                        <div>
-                            <div class="time">
-                                05:15
-                            </div>
-                            <div class="city">
-                                Makka
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flight-time">
-                        <div class="duration">06h 04m</div>
-                        <div class="direct">Direct</div>
-                    </div>
-                    <div class="price">
-                        EGP 5800.17
-                    </div>
-                    <div class="book-button">
-                        <button class="btn btn-danger">Book Now</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer bg-white d-flex justify-content-between align-items-center px-3">
-                <div class=" text-decoration-underline"><a href="">
-                    Flight Details
-                </a></div>
-                <div class="text-muted"><i class="fa-solid fa-share-nodes"></i></div>
-            </div>
+        <div
+          class="card-footer bg-white d-flex justify-content-between align-items-center px-3"
+        >
+          <div class="text-decoration-underline">
+            <a href=""> Flight Details </a>
+          </div>
+          <div class="text-muted"><i class="fa-solid fa-share-nodes"></i></div>
         </div>
-        
-        <div class="wholecard  border rounded overflow-hidden mb-3" *ngFor="let flight of filteredFlights">
-            <div class=" bg-white flight-card  border-bottom">
-                <div class="card-head d-flex justify-content-around align-items-center">
-                    <div class="flight-logo">
-                        <img [src]="flight.allJourney.flights[0].flightAirline.airlineLogo" class="" alt="">
-                    </div>
-                    <div>
-                        <div class="airline-name">
-                            {{flight.allJourney.flights[0].flightAirline.airlineName}}
-                        </div>
-                        <div class="airline-code">
-                            {{flight.allJourney.flights[0].flightAirline.airlineCode}} - {{flight.allJourney.flights[0].flightDTO[0].flightInfo.flightNumber}}
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="leave">
-                            <div class="time">
-                                {{flight.allJourney.flights[0].flightDTO[0].departureDate | date: 'hh:mm'}}
-                            </div>
-                            <div class="city">
-                                {{flight.allJourney.flights[0].flightDTO[0].departureTerminalAirport.cityName}}
-                            </div>
-                        </div>
-                        <div class="Line"></div>
-                        <div>
-                            <div class="time">
-                                {{flight.allJourney.flights[0].flightDTO[0].arrivalDate | date: 'hh:mm'}}
-                            </div>
-                            <div class="city">
-                                {{flight.allJourney.flights[0].flightDTO[0].arrivalTerminalAirport.cityName}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flight-time">
-                        <div class="duration">
-                            <!-- {{calcFlightDuration(flight.allJourney.flights[0].flightDTO[0].arrivalDate, flight.allJourney.flights[0].flightDTO[0].departureDate)}} -->
-                            {{calcFlightDuration(flight.allJourney.flights[0].flightDTO[0])}}
-                        </div>
-                        <div class="direct">
-                            <div *ngIf="flight.allJourney.flights[0].stopsNum == 0; else elseDirect">Direct</div>
-                            <ng-template #elseDirect>
-                                {{flight.allJourney.flights[0].stopsNum}} Stop
-                            </ng-template> 
-                        </div>
-                    </div>
-                    <div class="price">
-                        {{calcFlightPriceInEgyPound(flight.itinTotalFare.amount,flight.itinTotalFare.totalTaxes,flight.itinTotalFare.currencyCode)}}
-                    </div>
-                    <div class="book-button">
-                        <button class="btn btn-danger">Book Now</button>
-                    </div>
+      </div>
+  
+      <div
+        class="wholecard border rounded overflow-hidden mb-3"
+        *ngFor="let flight of filteredFlights"
+      >
+        <div class="bg-white flight-card border-bottom">
+          <div class="card-head d-flex justify-content-around align-items-center">
+            <div class="flight-logo">
+              <img
+                [src]="flight.allJourney.flights[0].flightAirline.airlineLogo"
+                class=""
+                alt=""
+              />
+            </div>
+            <div>
+              <div class="airline-name">
+                {{ flight.allJourney.flights[0].flightAirline.airlineName }}
+              </div>
+              <div class="airline-code">
+                {{ flight.allJourney.flights[0].flightAirline.airlineCode }} -
+                {{
+                  flight.allJourney.flights[0].flightDTO[0].flightInfo
+                    .flightNumber
+                }}
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="leave">
+                <div class="time">
+                  {{
+                    flight.allJourney.flights[0].flightDTO[0].departureDate
+                      | date : "hh:mm"
+                  }}
                 </div>
+                <div class="city">
+                  {{
+                    flight.allJourney.flights[0].flightDTO[0]
+                      .departureTerminalAirport.cityName
+                  }}
+                </div>
+              </div>
+              <div class="Line"></div>
+              <div>
+                <div class="time">
+                  {{
+                    flight.allJourney.flights[0].flightDTO[0].arrivalDate
+                      | date : "hh:mm"
+                  }}
+                </div>
+                <div class="city">
+                  {{
+                    flight.allJourney.flights[0].flightDTO[0]
+                      .arrivalTerminalAirport.cityName
+                  }}
+                </div>
+              </div>
             </div>
-            <div class="card-footer bg-white d-flex justify-content-between align-items-center px-3">
-                <div class=" text-decoration-underline"><a href="">
-                    Flight Details
-                </a></div>
-                <div class="text-muted"><i class="fa-solid fa-share-nodes"></i></div>
+            <div class="flight-time">
+              <div class="duration">
+                <!-- {{calcFlightDuration(flight.allJourney.flights[0].flightDTO[0].arrivalDate, flight.allJourney.flights[0].flightDTO[0].departureDate)}} -->
+                {{
+                  calcFlightDuration(flight.allJourney.flights[0].flightDTO[0])
+                }}
+              </div>
+              <div class="direct">
+                <div
+                  *ngIf="
+                    flight.allJourney.flights[0].stopsNum == 0;
+                    else elseDirect
+                  "
+                >
+                  Direct
+                </div>
+                <ng-template #elseDirect>
+                  {{ flight.allJourney.flights[0].stopsNum }} Stop
+                </ng-template>
+              </div>
             </div>
+            <div class="price">
+              {{
+                calcFlightPriceInEgyPound(
+                  flight.itinTotalFare.amount,
+                  flight.itinTotalFare.totalTaxes,
+                  flight.itinTotalFare.currencyCode
+                )
+              }}
+            </div>
+            <div class="book-button">
+              <button class="btn btn-danger">Book Now</button>
+            </div>
+          </div>
         </div>
+        <div
+          class="card-footer bg-white d-flex justify-content-between align-items-center px-3"
+        >
+          <div class="text-decoration-underline">
+            <a href=""> Flight Details </a>
+          </div>
+          <div class="text-muted"><i class="fa-solid fa-share-nodes"></i></div>
+        </div>
+      </div>
     </div>
     <div class="sidebar-right">
-        <div class="content mt-2">
-            <div class="">
-                <img src="../../../assets/images/ads.png" class="sidebar-right-img" alt="" srcset="">
-            </div>
-            <div class="my-3">
-                <img src="../../../assets/images/ads2.jpg" class="sidebar-right-img" alt="" srcset="">
-            </div>
+      <div class="content mt-2">
+        <div class="">
+          <img
+            src="../../../assets/images/ads.png"
+            class="sidebar-right-img"
+            alt=""
+            srcset=""
+          />
         </div>
+        <div class="my-3">
+          <img
+            src="../../../assets/images/ads2.jpg"
+            class="sidebar-right-img"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </div>
     </div>
-    
-</div>
+  </div>
