@@ -10,7 +10,7 @@
     }
 }
 /* Styles for screens with a width between 768px and 1023px (typically tablets) */
-@media only screen and (min-width: 768px) and (max-width: 1023px){
+@media only screen and (min-width: 768px) and (max-width: 1024px){
     .contain{
         width: 800px;
         margin: auto;

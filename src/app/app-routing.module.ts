@@ -15,7 +15,8 @@ const routes: Routes = [
     {path:'cheapest', component:FlightCheapestComponent}
   ]},
   {path:'hotels',component:HotelsComponent},
-  {path:'travels',component:BusinessTravelComponent}
+  {path:'travels',component:BusinessTravelComponent},
+  {path:'flightdetails/:id',component:FlightDetailsComponent}
 ];
 
 @NgModule({

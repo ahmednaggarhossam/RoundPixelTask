@@ -1,4 +1,5 @@
 <div class="second-view-content">
+  <!-- Start of filter Form -->
     <div class="sidebar-nav">
       <div class="px-3">
         <form
@@ -18,12 +19,9 @@
               placeholder="Search by Airport Name"
               id="searchFlights"
             />
+            <button (click)="submitForm()"> Submit</button>
           </div>
-          <div
-            *ngIf="
-              filterForm.get('airlineName')?.errors &&
-              filterForm.get('airlineName')?.touched
-            "
+          <div *ngIf="filterForm.get('airlineName')?.errors && filterForm.get('airlineName')?.touched"
             class="alert alert-warning"
             role="alert"
           >
@@ -59,6 +57,11 @@
         </form>
       </div>
     </div>
+  <!-- End of filter  Form -->
+
+
+  <!-- Flight Results -->
+
     <div class="flight-results">
       <div class="alert alert-warning mt-2" style="padding: 7px" role="alert">
         Please be aware that the local Egyptian banks have imposed a restriction
@@ -66,6 +69,7 @@
         Kindly use an international card if possible. We regret the inconvenience
         caused.
       </div>
+      Sponsored Flight Static
       <div class="flight-results-buttons d-flex border rounded-1">
         <a
           routerLinkActive="active"
@@ -200,6 +204,8 @@
         </div>
       </div>
   
+
+      <!-- Flight Cards Display from api -->
       <div
         class="wholecard border rounded overflow-hidden mb-3"
         *ngFor="let flight of filteredFlights"
@@ -287,7 +293,7 @@
               }}
             </div>
             <div class="book-button">
-              <button class="btn btn-danger">Book Now</button>
+              <button [routerLink]="['/flightdetails',flight.sequenceNum]" class="btn btn-danger">Book Now</button>
             </div>
           </div>
         </div>
@@ -301,6 +307,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Ads Sections -->
     <div class="sidebar-right">
       <div class="content mt-2">
         <div class="">

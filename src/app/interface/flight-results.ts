@@ -9,10 +9,13 @@ export interface flightResults {
     cabinClass: string;
     flightType: string;
     allJourney: AllJourney;
+    airItineraries: AirItineraries[];
     baggageInformation: BaggageInformation[];
     passengerFareBreakDownDTOs: PassengerFareBreakDownDTO[];
 }
-
+export interface AirItineraries{
+    allJourney: AllJourney[];
+}
 export interface PassengerFareBreakDownDTO {
     key: string;
     pricingMethod: string;

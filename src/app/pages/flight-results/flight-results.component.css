@@ -174,7 +174,6 @@ mat-slider {
     .second-view-content{
         display: flex;
         flex-direction: column;
-        background-color: red;
         width: 375px;
         margin: auto;
     }
@@ -183,29 +182,29 @@ mat-slider {
     }
     .flight-results{
         width: 375px;
-        background-color: blue;
     }
     .sidebar-nav{
         width: 375px;
 
     }
     .sidebar-right{
-        width: 375px;
+        width: 300px;
+        margin: auto;
+        padding: 0;
     }
     .sidebar-right .sidebar-right-img{
-        width: 375px;
+        width: 300px;
     }
 }
 /* Styles for screens with a width between 768px and 1023px (typically tablets) */
-@media only screen and (min-width: 768px) and (max-width: 1023px){
+@media only screen and (min-width: 768px) and (max-width: 1024px){
     .second-view-content{
         display: flex;
         flex-direction: column;
         width: 800px;
-        background-color: #000;
     }
     .card-head{
-        flex-direction: column;
+        flex-direction: row;
     }
     .flight-results{
         width: 800px;
@@ -216,9 +215,12 @@ mat-slider {
 
     }
     .sidebar-right{
-        width: 800px;
+        width: 360px;
+        margin: auto;
+        padding: 0;
     }
     .sidebar-right .sidebar-right-img{
-        width: 800px;
+        width: 360px;
+        margin: auto;
     }
 }
